@@ -20,11 +20,8 @@ abstract class CallbackTest {
     private WebDriver driver;
     ChromeOptions options = new ChromeOptions();
 
-
-
     @BeforeAll
     static void setUpAll() {
-//        System.setProperty("webdriver.chrome.driver", "./driver/chromedriver.exe");
         WebDriverManager.chromedriver().setup();
     }
 

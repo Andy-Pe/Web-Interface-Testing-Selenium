@@ -16,7 +16,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-abstract class CallbackTest {
+class CallbackTest {
     private WebDriver driver;
     ChromeOptions options = new ChromeOptions();
 
@@ -31,6 +31,7 @@ abstract class CallbackTest {
         options.addArguments("--no-sandbox");
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
+        driver.get("http://localhost:9999");
     }
 
     @AfterEach
@@ -41,7 +42,6 @@ abstract class CallbackTest {
 
     @Test
     void shouldTestV1() {
-        driver.get("http://localhost:9999");
         List<WebElement> elements = driver.findElements(By.className("input__control"));
         elements.get(0).sendKeys("Иванов Василий");
         elements.get(1).sendKeys("+79270000000");
@@ -54,7 +54,6 @@ abstract class CallbackTest {
 
     @Test
     void shouldTestIfDoubleName() {
-        driver.get("http://localhost:9999");
         List<WebElement> elements = driver.findElements(By.className("input__control"));
         elements.get(0).sendKeys("Сидорова Анна Мария");
         elements.get(1).sendKeys("+79270000000");
@@ -67,7 +66,6 @@ abstract class CallbackTest {
 
     @Test
     void shouldTestIfNameWithHyphen() {
-        driver.get("http://localhost:9999");
         List<WebElement> elements = driver.findElements(By.className("input__control"));
         elements.get(0).sendKeys("Маркелова Анна-Мария");
         elements.get(1).sendKeys("+79270000000");
@@ -80,7 +78,6 @@ abstract class CallbackTest {
 
     @Test
     void shouldTestV2() {
-        driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Круглов Василий");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79270000000");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
@@ -91,7 +88,6 @@ abstract class CallbackTest {
 
     @Test
     void shouldTestIfNameInEnglish() {
-        driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Ivan Ivanov");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79270000000");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
@@ -102,7 +98,6 @@ abstract class CallbackTest {
 
     @Test
     void shouldTestIfPhoneNumberWithMinus() {
-        driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иван Иванов");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("-79270000000");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
@@ -113,7 +108,6 @@ abstract class CallbackTest {
 
     @Test
     void shouldTestIfPhoneSmallerStandart() {
-        driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иван Иванов");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+7927000000");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();

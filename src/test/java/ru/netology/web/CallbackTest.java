@@ -121,15 +121,25 @@ class CallbackTest {
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иван Иванов");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79270000000");
         driver.findElement(By.cssSelector(".button__content")).click();
-        String text = driver.findElement(By.cssSelector(".checkbox__text")).getText();
+        String text = driver.findElement(By.cssSelector("[data-test-id=agreement].input_invalid .checkbox__text")).getText();
         assertEquals("Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй", text.trim());
     }
 
     @Test
-    void shouldTestIfNameAndPhoneNumberFieldsIsEmpty() {
+    void shouldTestIfNameFieldIsEmpty() {
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79270000000");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         driver.findElement(By.cssSelector(".button__content")).click();
         String text = driver.findElement(By.cssSelector("[data-test-id='name'].input_invalid .input__sub")).getText();
+        assertEquals("Поле обязательно для заполнения", text.trim());
+    }
+
+    @Test
+    void shouldTestIfPhoneNumberFieldIsEmpty() {
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иван Иванов");
+        driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
+        driver.findElement(By.cssSelector(".button__content")).click();
+        String text = driver.findElement(By.cssSelector("[data-test-id='phone'].input_invalid .input__sub")).getText();
         assertEquals("Поле обязательно для заполнения", text.trim());
     }
 }
